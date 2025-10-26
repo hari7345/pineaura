@@ -27,6 +27,131 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <!-- Custom Product Card Styles -->
+    <style>
+        /* Enhanced Product Card Styles */
+        .product-item {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 15px !important;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(171, 211, 115, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shine effect on hover */
+        .product-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+
+        .product-item:hover::before {
+            left: 100%;
+        }
+
+        .product-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(171, 211, 115, 0.3);
+            border-color: #abd373;
+        }
+
+        .product-img {
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f8f9fa;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-img img {
+            border-radius: 12px;
+            transition: transform 0.5s ease;
+        }
+
+        .product-item:hover .product-img img {
+            transform: scale(1.08);
+        }
+
+        /* Enhanced overlay */
+        .product-overlay {
+            background: linear-gradient(135deg, rgba(171, 211, 115, 0.95) 0%, rgba(171, 211, 115, 0.85) 100%);
+            border-radius: 12px;
+        }
+
+        .product-overlay .btn {
+            background: #ffffff;
+            color: #303030;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .product-overlay .btn:hover {
+            background: #303030;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Enhanced product content */
+        .product-content {
+            padding: 20px 10px 10px !important;
+            background: transparent;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-content .product-name {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.4;
+            color: #303030;
+            transition: color 0.3s ease;
+            display: block;
+            text-transform: capitalize;
+            letter-spacing: 0.3px;
+        }
+
+        .product-item:hover .product-content .product-name {
+            color: #abd373;
+        }
+
+        /* Decorative element */
+        .product-content::after {
+            content: '◆';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #abd373;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .product-item {
+                margin-bottom: 20px;
+            }
+
+            .product-item:hover {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -886,864 +1011,133 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <ul class="nav product-tab-nav tab-style-1" id="myTab" role="tablist">
-                            <!-- <li class="nav-item" role="presentation">
-                                <a class="active" id="featured-tab" data-bs-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="true">
-                                    Featured
-                                </a>
-                            </li> -->
-                            <li class="nav-item" role="presentation">
-                                <a class="active" id="bestseller-tab" data-bs-toggle="tab" href="#bestseller" role="tab" aria-controls="bestseller" aria-selected="true">
-                                    Bestseller
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a id="latest-tab" data-bs-toggle="tab" href="#latest" role="tab" aria-controls="latest" aria-selected="false">
-                                    Latest
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <!-- <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
-                                <div class="product-item-wrap row">
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-1-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-2-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">American Marigold</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$23.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                        <div class="tab-pane fade show active" id="bestseller" role="tabpanel" aria-labelledby="bestseller-tab" style="margin-top: 50px;">
+                            <div class="product-item-wrap row">
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
                                         </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-2-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-3-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Black Eyed Susan</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$25.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-3-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-4-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Bleeding Heart</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$30.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-4-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-5-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Bloody Cranesbill</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$45.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-5-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-6-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Butterfly Weed</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$50.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-6-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-7-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Common Yarrow</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$65.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-7-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-8-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Doublefile Viburnum</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$67.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-8-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-1-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Feather Reed Grass</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$20.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Raw Pineapple</a>                                               
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
-                            <div class="tab-pane fade show active" id="bestseller" role="tabpanel" aria-labelledby="bestseller-tab">
-                                <div class="product-item-wrap row">
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Raw Pineapple</a>                                               
-                                            </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
                                         </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Frozen Pineapple Long Strip</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Frozen Pineapple Diced</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Frozen Pineapple Sliced</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Frozen Pineapple Pulp</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Suphited Fiber Rich Pineapple Pulp</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Sulphited Pineapple Pulp</a>                                               
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
-                                                </a>
-                                                <div class="product-overlay">
-                                                    <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
-                                                </div>                                               
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" style="text-align: center;">Aseptictc Fiber Rich Pineapple Pulp</a>                                               
-                                            </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Frozen Pineapple Long Strip</a>                                               
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="latest" role="tabpanel" aria-labelledby="latest-tab">
-                                <div class="product-item-wrap row">
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-7-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-8-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Doublefile Viburnum</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$67.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Frozen Pineapple Diced</a>                                               
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-8-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-1-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Feather Reed Grass</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$20.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Frozen Pineapple Sliced</a>                                               
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-1-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-2-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">American Marigold</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$23.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Frozen Pineapple Pulp</a>                                               
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-2-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-3-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Black Eyed Susan</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$25.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Suphited Fiber Rich Pineapple Pulp</a>                                               
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-5-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-6-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Butterfly Weed</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$50.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Sulphited Pineapple Pulp</a>                                               
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-6-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-7-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Common Yarrow</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$65.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                </div>
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a href="shop.html">
+                                                <img class="primary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                                <img class="secondary-img" src="assets/images/products/rawpineapple.png" alt="Product Images">
+                                            </a>
+                                            <div class="product-overlay">
+                                                <a href="shop.html" class="btn btn-pronia-primary">See Details</a>
+                                            </div>                                               
                                         </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-3-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-4-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Bleeding Heart</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$30.45</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-4 col-sm-6 pt-4">
-                                        <div class="product-item">
-                                            <div class="product-img">
-                                                <a href="shop.html">
-                                                    <img class="primary-img" src="assets/images/product/medium-size/1-4-270x300.jpg" alt="Product Images">
-                                                    <img class="secondary-img" src="assets/images/product/medium-size/1-5-270x300.jpg" alt="Product Images">
-                                                </a>
-                                                <div class="product-add-action">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="wishlist.html" data-tippy="Add to wishlist" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-like"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="quuickview-btn" data-bs-toggle="modal" data-bs-target="#quickModal">
-                                                            <a href="#" data-tippy="Quickview" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-look"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="cart.html" data-tippy="Add to cart" data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder">
-                                                                <i class="pe-7s-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <a class="product-name" href="shop.html">Bloody Cranesbill</a>
-                                                <div class="price-box pb-1">
-                                                    <span class="new-price">$45.00</span>
-                                                </div>
-                                                <div class="rating-box">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                        <div class="product-content">
+                                            <a class="product-name" style="text-align: center;">Aseptictc Fiber Rich Pineapple Pulp</a>                                               
                                         </div>
                                     </div>
                                 </div>
