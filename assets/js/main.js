@@ -916,4 +916,21 @@
                 .fadeIn(900);
         }
     }
+
+    /*--------------------------------
+    Mobile Menu - Our Products Click Handler
+-------------------------------- */
+    $(document).on('click', '.mobile-menu a[href="#our-products"]', function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        
+        // Close mobile menu
+        $('#mobileMenu').removeClass('open');
+        $('.global-overlay').removeClass('overlay-open');
+        
+        // Scroll to products section
+        $('html, body').animate({
+            scrollTop: $(target).offset().top - 100
+        }, 600);
+    });
 })(jQuery);
