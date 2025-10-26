@@ -1,0 +1,41 @@
+/* Floating WhatsApp Icon */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 100px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background-color: #20b954;
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px #999;
+}
+
+.whatsapp-float i {
+    margin-top: 6px;
+}
+
+/* Responsive WhatsApp button */
+@media (max-width: 767px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 80px;
+        right: 20px;
+        font-size: 28px;
+    }
+}
