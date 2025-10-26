@@ -29,6 +29,14 @@
 
     <!-- Custom Product Card Styles -->
     <style>
+        /* Fix card heights consistency */
+        .product-item-wrap .col-xl-3,
+        .product-item-wrap .col-md-4,
+        .product-item-wrap .col-sm-6 {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
         /* Enhanced Product Card Styles */
         .product-item {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
@@ -39,6 +47,9 @@
             border: 1px solid rgba(171, 211, 115, 0.1);
             position: relative;
             overflow: hidden;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Shine effect on hover */
@@ -75,6 +86,9 @@
         .product-img img {
             border-radius: 12px;
             transition: transform 0.5s ease;
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         .product-item:hover .product-img img {
@@ -111,6 +125,10 @@
             background: transparent;
             position: relative;
             z-index: 2;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-content .product-name {
@@ -142,7 +160,9 @@
 
         /* Responsive adjustments */
         @media (max-width: 767px) {
-            .product-item {
+            .product-item-wrap .col-xl-3,
+            .product-item-wrap .col-md-4,
+            .product-item-wrap .col-sm-6 {
                 margin-bottom: 20px;
             }
 
