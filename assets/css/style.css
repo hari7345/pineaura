@@ -3033,6 +3033,9 @@ blockquote p {
 }
 .product-img img {
   width: 100%;
+  height: 280px;
+  object-fit: contain;
+  background-color: #f9f9f9;
 }
 .product-img img.secondary-img {
   position: absolute;
